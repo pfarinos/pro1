@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Hello, {data.name}!</h1>
+        <h1>Hello en vivo, {data.name}!</h1>
       </header>
     </div>
   );
