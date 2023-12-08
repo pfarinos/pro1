@@ -12,7 +12,7 @@ function App() {
   const fetchData = async () => {
     try {
       // Fetch the JSON data
-      const response = await fetch('/data.json');
+      const response = await fetch('data.json');
       const jsonData = await response.json();
 
       // Update the state with the fetched data
