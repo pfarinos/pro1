@@ -1,22 +1,31 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    // Fetch the data when the component mounts
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      // Fetch the JSON data
+      const response = await fetch('/data.json');
+      const jsonData = await response.json();
+
+      // Update the state with the fetched data
+      setData(jsonData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Hello, {data.name}!</h1>
       </header>
     </div>
   );
