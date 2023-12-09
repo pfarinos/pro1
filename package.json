@@ -38,5 +38,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://pfarinos.github.io/pro1"
+  // "homepage": "https://pfarinos.github.io/pro1"
+  "homepage": "."
 }
