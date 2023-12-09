@@ -23,6 +23,37 @@ function MealPlannerApp() {
     setSelectedDishes(newSelectedDishes);
   };
 
+  const renderTable = () => {
+    const daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th> </th>
+            {daysOfWeek.map((day, index) => (
+              <th key={index}>{day}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {selectedDishes.map((dish, index) => (
+            <tr key={index}>
+              <td>{dish.name}</td>
+              {daysOfWeek.map((_, dayIndex) => (
+                <td key={dayIndex}>
+                  {index % daysOfWeek.length === dayIndex ? (
+                    <strong>{dish.ingredient}</strong>
+                  ) : null}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
+
   return (
     <div className="MealPlannerApp">
       <h1>Planificador de Comidas</h1>
@@ -51,13 +82,7 @@ function MealPlannerApp() {
         />
       </div>
       <button onClick={handleButtonClick}>Generar Plan de Comidas</button>
-      <ul>
-        {selectedDishes.map((dish, index) => (
-          <li key={index}>
-            <strong>{dish.name}</strong> - {dish.ingredient}
-          </li>
-        ))}
-      </ul>
+      {selectedDishes.length > 0 ? renderTable() : null}
     </div>
   );
 }
