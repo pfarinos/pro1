@@ -1,0 +1,13 @@
+[
+    {"name": "Filete a la pimienta", "ingredient": "Filete, Pimienta", "category": "Carne"},
+    {"name": "Salmón al horno", "ingredient": "Salmón, Limón", "category": "Pescado"},
+    {"name": "Espaguetis Bolognesa", "ingredient": "Carne molida, Tomate, Espaguetis", "category": "Pasta"},
+    {"name": "Pollo al Curry", "ingredient": "Pollo, Curry", "category": "Carne"},
+    {"name": "Ceviche de Pescado", "ingredient": "Pescado, Limón, Cebolla", "category": "Pescado"},
+    {"name": "Lasagna", "ingredient": "Carne molida, Queso, Pasta", "category": "Pasta"},
+    {"name": "Ternera Marsala", "ingredient": "Ternera, Champiñones, Marsala", "category": "Carne"},
+    {"name": "Sushi de Salmón", "ingredient": "Salmón, Alga Nori, Arroz", "category": "Pescado"},
+    {"name": "Pasta Alfredo", "ingredient": "Pollo, Crema, Pasta", "category": "Pasta"},
+    {"name": "Ensalada César con Pollo", "ingredient": "Pollo, Lechuga, Aderezo César", "category": "Carne"}
+  ]
+  

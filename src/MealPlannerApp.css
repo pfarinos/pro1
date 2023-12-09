@@ -1,0 +1,18 @@
+.MealPlannerApp {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-top: 10px;
+  }
+  
