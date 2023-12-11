@@ -42,32 +42,24 @@ function MealPlannerApp() {
     setSelectedDishes(newSelectedDishes);
   };
 
-  const renderTable = () => {
-    const daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-
+  const renderSelectedDishes = () => {
     return (
-      <table>
-        <thead>
-          <tr>
-            <th> </th>
-            {daysOfWeek.map((day, index) => (
-              <th key={index}>{day}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
+      <div>
+        <h2>Platos Seleccionados</h2>
+        <ul>
           {selectedDishes.map((dish, index) => (
-            <tr key={index}>
-              <td>{dish.name}</td>
-              {daysOfWeek.map((_, dayIndex) => (
-                <td key={dayIndex}>
-                  {index === dayIndex ? <strong>{dish.ingredient}</strong> : null}
-                </td>
-              ))}
-            </tr>
+            <li key={index}>
+              <strong>{dish.name}</strong>
+            </li>
           ))}
-        </tbody>
-      </table>
+        </ul>
+        <h2>Lista de la compra</h2>
+        <ul>
+          {selectedDishes.map((dish, index) => (
+            <li key={index}>{dish.ingredient}</li>
+          ))}
+        </ul>
+      </div>
     );
   };
 
@@ -90,7 +82,7 @@ function MealPlannerApp() {
         onChange={(value) => handleInputChange('Pasta', value)}
       />
       <button onClick={handleButtonClick}>Generar Plan de Comidas</button>
-      {selectedDishes.length > 0 ? renderTable() : null}
+      {selectedDishes.length > 0 ? renderSelectedDishes() : null}
     </div>
   );
 }
