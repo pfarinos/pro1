@@ -2,6 +2,19 @@ import React, { useState } from 'react';
 import './MealPlannerApp.css';
 import dishesData from './dishes.json';
 
+function DishInput({ label, value, onChange }) {
+  return (
+    <div>
+      <label>{label}</label>
+      <input
+        type="number"
+        value={value}
+        onChange={(e) => onChange(parseInt(e.target.value, 10))}
+      />
+    </div>
+  );
+}
+
 function MealPlannerApp() {
   const [selectedDishes, setSelectedDishes] = useState([]);
   const [categoryCounts, setCategoryCounts] = useState({ Carne: 0, Pescado: 0, Pasta: 0 });
@@ -10,6 +23,12 @@ function MealPlannerApp() {
     const categoryDishes = dishesData.filter((dish) => dish.category === category);
     const randomIndex = Math.floor(Math.random() * categoryDishes.length);
     return categoryDishes[randomIndex];
+  };
+
+  const handleInputChange = (category, value) => {
+    if (value >= 0) {
+      setCategoryCounts({ ...categoryCounts, [category]: value });
+    }
   };
 
   const handleButtonClick = () => {
@@ -42,9 +61,7 @@ function MealPlannerApp() {
               <td>{dish.name}</td>
               {daysOfWeek.map((_, dayIndex) => (
                 <td key={dayIndex}>
-                  {index % daysOfWeek.length === dayIndex ? (
-                    <strong>{dish.ingredient}</strong>
-                  ) : null}
+                  {index === dayIndex ? <strong>{dish.ingredient}</strong> : null}
                 </td>
               ))}
             </tr>
@@ -57,30 +74,21 @@ function MealPlannerApp() {
   return (
     <div className="MealPlannerApp">
       <h1>Planificador de Comidas</h1>
-      <div>
-        <label>Cantidad de Platos de Carne:</label>
-        <input
-          type="number"
-          value={categoryCounts.Carne}
-          onChange={(e) => setCategoryCounts({ ...categoryCounts, Carne: parseInt(e.target.value, 10) })}
-        />
-      </div>
-      <div>
-        <label>Cantidad de Platos de Pescado:</label>
-        <input
-          type="number"
-          value={categoryCounts.Pescado}
-          onChange={(e) => setCategoryCounts({ ...categoryCounts, Pescado: parseInt(e.target.value, 10) })}
-        />
-      </div>
-      <div>
-        <label>Cantidad de Platos de Pasta:</label>
-        <input
-          type="number"
-          value={categoryCounts.Pasta}
-          onChange={(e) => setCategoryCounts({ ...categoryCounts, Pasta: parseInt(e.target.value, 10) })}
-        />
-      </div>
+      <DishInput
+        label="Cantidad de Platos de Carne:"
+        value={categoryCounts.Carne}
+        onChange={(value) => handleInputChange('Carne', value)}
+      />
+      <DishInput
+        label="Cantidad de Platos de Pescado:"
+        value={categoryCounts.Pescado}
+        onChange={(value) => handleInputChange('Pescado', value)}
+      />
+      <DishInput
+        label="Cantidad de Platos de Pasta:"
+        value={categoryCounts.Pasta}
+        onChange={(value) => handleInputChange('Pasta', value)}
+      />
       <button onClick={handleButtonClick}>Generar Plan de Comidas</button>
       {selectedDishes.length > 0 ? renderTable() : null}
     </div>

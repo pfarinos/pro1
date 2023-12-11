@@ -1,6 +1,6 @@
 // index.js
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import MealPlannerApp from './MealPlannerApp';  // Asegúrate de importar el componente correcto
 import reportWebVitals from './reportWebVitals';
