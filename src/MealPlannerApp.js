@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MealPlannerApp.css';
 import dishesData from './dishes.json';
+import categoriesData from './categories.json';
 
 function DishInput({ label, value, onChange }) {
   return (
@@ -17,7 +18,15 @@ function DishInput({ label, value, onChange }) {
 
 function MealPlannerApp() {
   const [selectedDishes, setSelectedDishes] = useState([]);
-  const [categoryCounts, setCategoryCounts] = useState({ Carne: 0, Pescado: 0, Pasta: 0 });
+  const [categoryCounts, setCategoryCounts] = useState({});
+
+  useEffect(() => {
+    const initialCategoryCounts = {};
+    categoriesData.categories.forEach((category) => {
+      initialCategoryCounts[category] = 0;
+    });
+    setCategoryCounts(initialCategoryCounts);
+  }, []);
 
   const getRandomDish = (category) => {
     const categoryDishes = dishesData.filter((dish) => dish.category === category);
@@ -66,21 +75,14 @@ function MealPlannerApp() {
   return (
     <div className="MealPlannerApp">
       <h1>Planificador de Comidas</h1>
-      <DishInput
-        label="Cantidad de Platos de Carne:"
-        value={categoryCounts.Carne}
-        onChange={(value) => handleInputChange('Carne', value)}
-      />
-      <DishInput
-        label="Cantidad de Platos de Pescado:"
-        value={categoryCounts.Pescado}
-        onChange={(value) => handleInputChange('Pescado', value)}
-      />
-      <DishInput
-        label="Cantidad de Platos de Pasta:"
-        value={categoryCounts.Pasta}
-        onChange={(value) => handleInputChange('Pasta', value)}
-      />
+      {categoriesData.categories.map((category) => (
+        <DishInput
+          key={category}
+          label={`Cantidad de Platos de ${category}:`}
+          value={categoryCounts[category] || 0}  // Set initial value to 0
+          onChange={(value) => handleInputChange(category, value)}
+        />
+      ))}
       <button onClick={handleButtonClick}>Generar Plan de Comidas</button>
       {selectedDishes.length > 0 ? renderSelectedDishes() : null}
     </div>
