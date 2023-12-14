@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+// src/App.js
 
-function App() {
-  const [data, setData] = useState({});
+import React, { useState } from 'react';
+import MealPlannerApp from './MealPlannerApp';
+import RecipeAdd from './RecipeAdd';
 
-  useEffect(() => {
-    // Fetch the data when the component mounts
-    fetchData();
-  }, []);
+const App = () => {
+  const [showMealPlanner, setShowMealPlanner] = useState(false);
+  const [showRecipeAdd, setShowRecipeAdd] = useState(false);
 
-  const fetchData = async () => {
-    try {
-      // Fetch the JSON data
-      const response = await fetch('/data.json');
-      const jsonData = await response.json();
+  const handleMealPlannerClick = () => {
+    setShowMealPlanner(true);
+    setShowRecipeAdd(false);
+  };
 
-      // Update the state with the fetched data
-      setData(jsonData);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+  const handleRecipeAddClick = () => {
+    setShowMealPlanner(false);
+    setShowRecipeAdd(true);
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hello en vivo, {data.name}!</h1>
-      </header>
+    <div>
+      <h1>Home Page</h1>
+      <button onClick={handleMealPlannerClick}>Start Meal Planner App</button>
+      <button onClick={handleRecipeAddClick}>Start Recipe Manager App</button>
+
+      {showMealPlanner && <MealPlannerApp />}
+      {showRecipeAdd && <RecipeAdd />}
     </div>
   );
-}
+};
 
 export default App;
